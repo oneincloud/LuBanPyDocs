@@ -1,2 +1,11 @@
-site_name: 鲁班派-开发手册
-theme: rtd-dropdown
+site_name: LuBanPy - 文档
+site_description: Python快捷开发框架
+copyright: Copyright © 023 [LuBanPy](https://github.com/oneincloud/LuBanPy)
+theme: material
+
+nav:
+- 从零开始:
+  - 概要: index.md
+  - 安装: install.md
+- 基础教程: index.md
+- 进阶教程: index.md
