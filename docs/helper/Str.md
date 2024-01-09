@@ -2,9 +2,9 @@
 
 ## TODO功能清单：
 
+- [ ] ascii - 尝试将字符串转换为 ASCII 值
 - [ ] after - 返回字符串中指定值之后的所有内容
 - [ ] afterLast - 返回字符串中指定值最后一次出现后的所有内容
-- [ ] ascii - 尝试将字符串转换为 ASCII 值
 - [ ] transliterate
 - [ ] before - 返回字符串中指定值之前的所有内容
 - [ ] beforeLast - 返回字符串中指定值最后一次出现前的所有内容
@@ -20,15 +20,16 @@
 - [ ] isAscii - 用于判断字符串是否是 7 位 ASCII
 - [ ] isJson - 确定给定的字符串是否是有效的 JSON
 - [ ] isUrl
-- [ ] length - 返回指定字符串的长度
-- [ ] limit - 将字符串以指定长度进行截断
+- [x] length - 获取字符个数
+- [x] size - 获取字符串的字节个数
+- [x] limit - 将字符串以指定长度进行截断
 - [ ] words - 限制字符串中的单词数
 - [ ] markdown
 - [ ] inlineMarkdown
-- [ ] mask - 使用重复的字符掩盖字符串的一部分
+- [x] mask - 使用重复的字符掩盖字符串的一部分
 - [ ] match - 返回字符串中和指定正则表达式匹配的部分
-- [ ] isMatch - 用于判断给定的字符串是否与正则表达式匹配
 - [ ] matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
+- [ ] isMatch - 用于判断给定的字符串是否与正则表达式匹配
 - [ ] padBoth - 在指定字符串的两侧填充上另一字符串
 - [ ] padLeft - 在指定字符串的左侧填充上另一字符串
 - [ ] padRight - 在指定字符串的右侧填充上另一字符串
@@ -39,25 +40,28 @@
 - [ ] password - 生成给定长度的安全随机密码
 - [ ] position
 - [x] random - 生成指定长度的随机字符串
-- [ ] repeat
 - [ ] toStringOr
-- [ ] replace - 用于替换字符串中的给定字符串
+- [x] replace - 用于替换字符串中的给定字符串
+- [x] replaceIgnoreCase - 用于替换字符串中的给定字符串（不区分大小写）
 - [ ] replaceArray - 使用数组有序的替换字符串中的特定字符
 - [ ] replaceFirst - 替换字符串中给定值的第一个匹配项
 - [ ] replaceLast - 替换字符串中最后一次出现的给定值
 - [ ] replaceStart
 - [ ] replaceEnd
-- [ ] replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
+- [x] replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
 - [ ] substrReplace - 替换字符串一部分中的文本
 - [ ] swap - 替换给定字符串中的多个值
+- [ ] repeat
 - [ ] prepend - 用于在指定字符串的开头插入另一指定字符串
 - [ ] append - 将给定的值附加到字符串
 - [ ] remove - 用于从字符串中删除给定的值或值数组
 - [ ] reverse - 反转给定的字符串
+- [ ] startsWith - 确定给定字符串是否以给定值开头
+- [ ] endsWith - 用于判断指定字符串是否以另一指定字符串结尾
 - [ ] start - 给定值的单个实例添加到字符串中
 - [ ] finish - 将指定的字符串修改为以指定的值结尾的形式
-- [ ] lower - 用于将字符串转换为小写
-- [ ] upper - 将给定字符串转换为大写
+- [x] lower - 用于将字符串转换为小写
+- [x] upper - 将给定字符串转换为大写
 - [ ] headline - 将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
 - [ ] title - 将给定的字符串转换为 `Title Case`
 - [ ] slug - 从给定字符串生成 URL 友好的 `“slug”`
@@ -68,8 +72,6 @@
 - [ ] squish - 删除字符串中所有无关紧要的空白，包括字符串之间的空白
 - [ ] ucfirst - 返回第一个字符大写的给定字符串
 - [ ] lcfirst - 返回给定的字符串的第一个字符为小写字母
-- [ ] startsWith - 确定给定字符串是否以给定值开头
-- [ ] endsWith - 用于判断指定字符串是否以另一指定字符串结尾
 - [ ] substr - 类似python字符串的`切片`功能
 - [ ] substrCount - 返回给定字符串中给定值的出现次数
 - [ ] take
@@ -87,12 +89,15 @@
 
 
 
+## ascii - 尝试将字符串转换为 ASCII 值
+
 
 
 
 ## after - 返回字符串中指定值之后的所有内容
 ## afterLast - 返回字符串中指定值最后一次出现后的所有内容
-## ascii - 尝试将字符串转换为 ASCII 值
+
+
 ## transliterate
 ## before - 返回字符串中指定值之前的所有内容
 ## beforeLast - 返回字符串中指定值最后一次出现前的所有内容
@@ -108,16 +113,162 @@
 ## isAscii - 用于判断字符串是否是 7 位 ASCII
 ## isJson - 确定给定的字符串是否是有效的 JSON
 ## isUrl
-## length - 返回指定字符串的长度
+
+
+## length - 获取字符个数
+
+获取字符串中的字符个数，当遇到None时不会报错，返回`0`。
+
+```python
+def length(value, trim: bool = False) -> int:
+```
+
+### - 参数说
+
+| 参数  | 类型 | 必选 | 默认值 | 说明             |
+| ----- | ---- | ---- | ------ | ---------------- |
+| value | str  | Y    |        | 字符串值         |
+| trim  | bool | N    | False  | 是否去除前向空格 |
+
+### - 参数说明
+
+```python
+# ASCII字符串：
+Str.length('abcde')		# 结果：5
+
+# 中文字符串：
+Str.length('中文字符串')		# 结果：5
+
+# 混合字符串：
+Str.length('abcde中文字符串')	# 结果：10
+
+# 非字符串值
+Str.length(None)			# 结果： 0
+```
+
+
+
+## size - 获取字符串的字节个数
+
+> utf-8编码：一个中文包含繁体字等于三个字节，一个英文字符等于一个字节。
+>
+> gbk编码：一个中文包含繁体字等于二个字节，一个英文字符等于一个字节。
+
+```python
+def size(cls, value, encoding: Optional[str] = None) -> int:
+```
+
+### - 参数说明
+
+| 参数     | 类型          | 必选 | 默认值 | 说明                                          |
+| -------- | ------------- | ---- | ------ | --------------------------------------------- |
+| value    | str           | Y    |        | 字符串值                                      |
+| encoding | Optional[str] | N    | None   | 字符串编码，默认当前环境默认编码，一般是utf-8 |
+
+### - 使用示例
+
+```python
+from LuBan.helper import Str
+
+print(f"ASCII字符串：{Str.size('abcde')}")		# 结果：5
+print(f"中文字符串：{Str.size('中文字符串')}")		# 结果：15
+print(f"中文字符串GBK：{Str.size('中文字符串', encoding='gbk')}")		# 结果：10
+print(f"混合字符串：{Str.size('abcde中文字符串')}")					# 结果：20
+print(f"混合字符串GBK：{Str.size('abcde中文字符串', encoding='gbk')}")		# 结果：15
+print(f"非字符串值：{Str.size(None)}")		# 结果：0
+```
+
+
+
+
+
 ## limit - 将字符串以指定长度进行截断
+
+```python
+def limit(cls, text, limit: int = 100, end: str = "...") -> str:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明         |
+| ----- | ---- | ---- | ------ | ------------ |
+| text  | str  | Y    |        | 字符串       |
+| limit | int  | Y    | 100    | 限制最大长度 |
+| end   | str  | N    | "..."  | 省略符       |
+
+### - 使用示例
+
+```python
+from LuBan.helper import Str
+import string
+
+print(f"ASCII截取：{Str.limit(string.ascii_letters, 5)}")		   # 结果：abcde...
+print(f"中文截取：{Str.limit('中文长度限制截取测试', 5)}")				# 结果：中文长度限...
+print(f"中英文混合截取：{Str.limit('a中b文c的d长e度', 5)}")			# 结果：a中b文c...
+print(f"非字符类型测试：{Str.limit(None, 2)}")						# 结果：No...
+```
+
+
+
 ## words - 限制字符串中的单词数
+
 ## markdown
 ## inlineMarkdown
 ## mask - 使用重复的字符掩盖字符串的一部分
+`mask`方法用重复字符掩盖字符串的一部分，并可用于混淆字符串段，例如电子邮件地址和电话号码。
+
+```python
+def mask(cls, text: str, index: int, length: Optional[int] = None, character: str = '*') -> str:
+```
+
+### - 参数说明
+
+| 参数      | 类型      | 必选 | 默认值 | 说明                             |
+| --------- | --------- | ---- | ------ | -------------------------------- |
+| text      | str\|None | Y    |        | 字符串                           |
+| index     | int       | Y    |        | 起始位置，可以使用负值           |
+| lengthi   | int       | N    | None   | 掩盖长度，若为负值则使用切片下标 |
+| character | str       | N    | *      | 掩盖字符                         |
+
+### - 使用示例
+
+```python
+from LuBan.helper import Str
+
+_text = '0123456789'
+
+# 从第5位开始遮掩
+print(f"从第5位开始遮掩：{Str.mask(_text, 5)}")
+# 结果：01234*****
+
+# 从第3位开始，遮掩4位
+print(f"从第3位开始，遮掩4位：{Str.mask(_text, 3, 4)}")
+# 结果：012****789
+
+# 从第1位至最后一位遮掩
+print(f"从第1位至最后一位遮掩：{Str.mask(_text, 1, -1)}")
+# 结果：0********9
+```
+
+
+
+
+
+
+
 ## match - 返回字符串中和指定正则表达式匹配的部分
-## isMatch - 用于判断给定的字符串是否与正则表达式匹配
+
+
+
 ## matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
+
+
+## isMatch - 用于判断给定的字符串是否与正则表达式匹配
+
+
+
 ## padBoth - 在指定字符串的两侧填充上另一字符串
+
 ## padLeft - 在指定字符串的左侧填充上另一字符串
 ## padRight - 在指定字符串的右侧填充上另一字符串
 ## parseCallback
@@ -173,16 +324,83 @@ Str.random(length=4, charType=Str.CHAR_TYPE_ALPHA_CHS)	# 结果：集员地断
 
 
 
-
-
-## repeat
-
 ## toStringOr
+
+
 ## replace - 用于替换字符串中的给定字符串
+
+`replace` 方法用于将字符串中的指定字符串替换为另一指定字符串
+
+```python
+def replace(cls, subject: str, search: str, replace: str, count: int = 0, caseSensitive: bool = True) -> str:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                                |
+| ------------- | ---- | ---- | ------ | ----------------------------------- |
+| subject       | str  | Y    |        | 要搜索替换的目标字符串              |
+| search        | str  | Y    |        | 要查找的值                          |
+| replace       | str  | Y    |        | 替换 `search` 的值                  |
+| count         | int  | N    | 0      | 替换的最大次数，默认是`0`（无限制） |
+| caseSensitive | bool | N    | True   | 区分大小写，默认`True`区分          |
+
+### - 使用示例
+
+默认区分大小写
+
+```python
+# ASCII替换，默认区分大小写
+Str.replace('abABabABabAB', 'ab', 'ef')		# 结果：efABefABefAB
+
+# 中文替换
+Str.replace('中文中文中文', '中', '英')			# 结果：英文英文英文
+
+# 限制最大替换2次
+Str.replace('abABabABabAB', 'ab', 'ef', 2)		# 结果：efABefABabAB
+Str.replace('中文中文中文', '中', '英', 2)		   # 结果：英文英文中文
+```
+
+强制忽略大小写
+
+```python
+# ASCII替换，忽略大小写
+Str.replace('abABabABabAB', 'ab', 'ef', caseSensitive=False)	# 结果：efefefefefef
+
+# 限制最大替换2次
+Str.replace('abABabABabAB', 'ab', 'ef', 2)		# 结果：efABefABabAB
+Str.replace('abABabABabAB', 'ab', 'ef', 2, caseSensitive=False) # 结果：efefabABabAB
+```
+
+
+
+## replaceIgnoreCase - 用于替换字符串中的给定字符串（不区分大小写）
+
+```python
+def replaceIgnoreCase(cls, subject: str, search: str, replace: str, count: int = 0) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明                                |
+| ------- | ---- | ---- | ------ | ----------------------------------- |
+| subject | str  | Y    |        | 要搜索替换的目标字符串              |
+| search  | str  | Y    |        | 要查找的值                          |
+| replace | str  | Y    |        | 替换 `search` 的值                  |
+| count   | int  | N    | 0      | 替换的最大次数，默认是`0`（无限制） |
+
+### - 使用示例
+
+
+
+
+
 ## replaceArray - 使用数组有序的替换字符串中的特定字符
+
 ## replaceFirst - 替换字符串中给定值的第一个匹配项
 ## replaceLast - 替换字符串中最后一次出现的给定值
 ## replaceStart
+
 ## replaceEnd
 ## replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
 ## substrReplace - 替换字符串一部分中的文本
@@ -193,9 +411,48 @@ Str.random(length=4, charType=Str.CHAR_TYPE_ALPHA_CHS)	# 结果：集员地断
 ## reverse - 反转给定的字符串
 ## start - 给定值的单个实例添加到字符串中
 ## finish - 将指定的字符串修改为以指定的值结尾的形式
+
+
 ## lower - 用于将字符串转换为小写
+
+```python
+def lower(value) -> str:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明   |
+| ----- | ---- | ---- | ------ | ------ |
+| value | str  | Y    | 无     | 字符串 |
+
+### - 使用示例
+
+
+
 ## upper - 将给定字符串转换为大写
-## headline - 将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
+
+```python
+def upper(value) -> str:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明   |
+| ----- | ---- | ---- | ------ | ------ |
+| value | str  | Y    | 无     | 字符串 |
+
+### - 使用示例
+
+
+
+## headline - 将给定字符串的每个单词转换为标题大小写
+
+`headline` 方法会将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
+
+
+
+
+
 ## title - 将给定的字符串转换为 `Title Case`
 ## slug - 从给定字符串生成 URL 友好的 `“slug”`
 ## camel - 将指定字符串转换为`camelCase 驼峰式` 表示方法
