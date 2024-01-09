@@ -11,6 +11,8 @@
 - [ ] between - 返回字符串在指定两个值之间的内容
 - [ ] betweenFirst - 返回字符串在指定两个值之间的最小可能的部分
 - [ ] charAt
+- [x] find - 获取子字符串在字符串的首次出现位置
+- [x] rfind - 获取子字符串在字符串的最后出现位置
 - [ ] contains - 判断指定字符串中是否包含另一指定字符串
 - [ ] containsAll - 用于判断指定字符串是否包含指定数组中的所有值
 - [ ] convertCase
@@ -27,9 +29,9 @@
 - [ ] markdown
 - [ ] inlineMarkdown
 - [x] mask - 使用重复的字符掩盖字符串的一部分
-- [ ] match - 返回字符串中和指定正则表达式匹配的部分
-- [ ] matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
-- [ ] isMatch - 用于判断给定的字符串是否与正则表达式匹配
+- [x] match - 返回字符串中和指定正则表达式匹配的部分
+- [x] matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
+- [x] isMatch - 用于判断给定的字符串是否与正则表达式匹配
 - [ ] padBoth - 在指定字符串的两侧填充上另一字符串
 - [ ] padLeft - 在指定字符串的左侧填充上另一字符串
 - [ ] padRight - 在指定字符串的右侧填充上另一字符串
@@ -58,8 +60,8 @@
 - [ ] reverse - 反转给定的字符串
 - [ ] startsWith - 确定给定字符串是否以给定值开头
 - [ ] endsWith - 用于判断指定字符串是否以另一指定字符串结尾
-- [ ] start - 给定值的单个实例添加到字符串中
-- [ ] finish - 将指定的字符串修改为以指定的值结尾的形式
+- [x] start - 给定值的单个实例添加到字符串中
+- [x] finish - 将指定的字符串修改为以指定的值结尾的形式
 - [x] lower - 用于将字符串转换为小写
 - [x] upper - 将给定字符串转换为大写
 - [ ] headline - 将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
@@ -104,7 +106,78 @@
 ## between - 返回字符串在指定两个值之间的内容
 ## betweenFirst - 返回字符串在指定两个值之间的最小可能的部分
 ## charAt
+
+
+## find - 获取子字符串在字符串的首次出现位置
+
+检测 子字符串是否包含在 字符串 中，如果是返回开始的索引值，否则返回-1
+
+```python
+def find(text: str, search: str, caseSensitive: bool = True) -> int:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| text          | str  | Y    |        | 要被检查的 string                |
+| search        | str  | Y    |        | 在 text 中查找这个字符串         |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+# ASCII测试，区分大小写
+Str.find('abcdEFGHijk abcdEFGHijk', 'EF')		# 结果：4
+
+# ASCII测试，不包含
+Str.find('abcdEFGHijk abcdEFGHijk', 'ef')		# 结果：-1
+
+# ASCII测试，忽略大小写
+Str.find('abcdEFGHijk abcdEFGHijk', 'ef', False)	# 结果：4
+
+# 中文测试
+Str.find('你好Python 你好Python', '好P')				# 结果： 1
+```
+
+
+
+## rfind - 获取子字符串在字符串的最后出现位置
+
+检测 子字符串是否包含在 字符串 中，如果是返回最后的索引值，否则返回-1
+
+```python
+def rfind(text: str, search: str, caseSensitive: bool = True) -> int:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| text          | str  | Y    |        | 要被检查的 string                |
+| search        | str  | Y    |        | 在 text 中查找这个字符串         |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+# ASCII测试，区分大小写
+Str.rfind('abcdEFGHijk abcdEFGHijk', 'EF')		# 结果：16
+
+# ASCII测试，不包含
+Str.rfind('abcdEFGHijk abcdEFGHijk', 'ef')		# 结果：-1
+
+# ASCII测试，忽略大小写
+Str.rfind('abcdEFGHijk abcdEFGHijk', 'ef', False)	# 结果：16
+
+# 中文测试
+Str.rfind('你好Python 你好Python', '好P')				# 结果： 10
+```
+
+
+
 ## contains - 判断指定字符串中是否包含另一指定字符串
+
 ## containsAll - 用于判断指定字符串是否包含指定数组中的所有值
 ## convertCase
 ## excerpt - 提取字符串中给定短语匹配到的第一个片段
@@ -227,7 +300,7 @@ def mask(cls, text: str, index: int, length: Optional[int] = None, character: st
 | --------- | --------- | ---- | ------ | -------------------------------- |
 | text      | str\|None | Y    |        | 字符串                           |
 | index     | int       | Y    |        | 起始位置，可以使用负值           |
-| lengthi   | int       | N    | None   | 掩盖长度，若为负值则使用切片下标 |
+| length    | int       | N    | None   | 掩盖长度，若为负值则使用切片下标 |
 | character | str       | N    | *      | 掩盖字符                         |
 
 ### - 使用示例
@@ -252,18 +325,71 @@ print(f"从第1位至最后一位遮掩：{Str.mask(_text, 1, -1)}")
 
 
 
-
-
-
-
 ## match - 返回字符串中和指定正则表达式匹配的部分
+
+```python
+def match(pattern: Union[str, re.Pattern], subject: str, flags: int = 0) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型                   | 必选 | 默认值 | 说明                                                         |
+| ------- | ---------------------- | ---- | ------ | ------------------------------------------------------------ |
+| pattern | Union[str, re.Pattern] | Y    |        | 匹配的正则表达式                                             |
+| subject | str                    | Y    |        | 要匹配的字符串                                               |
+| flags   | int                    | N    | 0      | 标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等 |
+
+### - 使用示例
+
+```python
+Str.match('bar', 'foo bar')		# 结果：bar
+Str.match('foo (.*)', 'foo bar')	# 结果：bar
+```
 
 
 
 ## matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
+```python
+def matchAll(pattern: Union[str, re.Pattern], subject: str, flags: int = 0) -> List[str]:
+```
+
+### - 参数说明
+
+| 参数    | 类型                   | 必选 | 默认值 | 说明                                                         |
+| ------- | ---------------------- | ---- | ------ | ------------------------------------------------------------ |
+| pattern | Union[str, re.Pattern] | Y    |        | 匹配的正则表达式                                             |
+| subject | str                    | Y    |        | 要匹配的字符串                                               |
+| flags   | int                    | N    | 0      | 标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等 |
+
+### - 使用示例
+
+```python
+Str.matchAll(r'bar', 'bar1 foo bar2')		# 结果：['bar', 'bar']
+Str.matchAll(r'f(\w*)', 'bar fun bar fly') 	# 结果：['un', 'ly']
+```
+
 
 
 ## isMatch - 用于判断给定的字符串是否与正则表达式匹配
+
+```python
+def isMatch(pattern: Union[str, re.Pattern, List[str], Tuple[str], List[re.Pattern], Tuple[re.Pattern]], subject: str, flags: int = 0) -> bool:
+```
+
+### - 参数说明
+
+| 参数    | 类型                                                         | 必选 | 默认值 | 说明                                                         |
+| ------- | ------------------------------------------------------------ | ---- | ------ | ------------------------------------------------------------ |
+| pattern | Union[str, re.Pattern, List[str], Tuple[str], List[re.Pattern], Tuple[re.Pattern]] | Y    |        | 匹配的正则表达式，可批量测试                                 |
+| subject | str                                                          | Y    |        | 要匹配的字符串                                               |
+| flags   | int                                                          | N    | 0      | 标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等 |
+
+### - 使用示例
+
+```python
+Str.isMatch('foo (.*)', 'foo bar')		# 结果：True
+Str.isMatch('foo (.*)', 'laravel')		# 结果：False
+```
 
 
 
@@ -409,8 +535,53 @@ def replaceIgnoreCase(cls, subject: str, search: str, replace: str, count: int =
 ## append - 将给定的值附加到字符串
 ## remove - 用于从字符串中删除给定的值或值数组
 ## reverse - 反转给定的字符串
-## start - 给定值的单个实例添加到字符串中
+## start - 将给定的值添加到字符串的开始位置
+`start` 方法将给定值的单个实例添加到字符串中，前提是该字符串尚未以该值开头
+
+```python
+def start(value: str, prefix: str) -> str:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| text          | str  | Y    |        | 要被检查的 string                |
+| prefix        | str  | Y    |        | 指定字符前缀                     |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.start('this/string', '/')		# 结果：/this/string
+Str.start('/this/string', '/')		# 结果：/this/string
+```
+
+
+
 ## finish - 将指定的字符串修改为以指定的值结尾的形式
+
+`finish` 方法将给定值的单个实例添加到字符串中（如果它尚未以该值结尾）
+
+```python
+def finish(value: str, cap: str) -> str:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| text          | str  | Y    |        | 要被检查的 string                |
+| cap           | str  | Y    |        | 指定结尾字符                     |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.finish('this/string', '/')		# 结果：this/string/
+Str.finish('this/string/', '/')		# 结果：this/string/
+```
+
 
 
 ## lower - 用于将字符串转换为小写
