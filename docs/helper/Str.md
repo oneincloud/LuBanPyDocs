@@ -56,10 +56,10 @@
 - [ ] repeat
 - [ ] prepend - 用于在指定字符串的开头插入另一指定字符串
 - [ ] append - 将给定的值附加到字符串
-- [ ] remove - 用于从字符串中删除给定的值或值数组
-- [ ] reverse - 反转给定的字符串
-- [ ] startsWith - 确定给定字符串是否以给定值开头
-- [ ] endsWith - 用于判断指定字符串是否以另一指定字符串结尾
+- [x] remove - 用于从字符串中删除给定的值或值数组
+- [x] reverse - 反转给定的字符串
+- [x] startsWith - 确定给定字符串是否以给定值开头
+- [x] endsWith - 用于判断指定字符串是否以另一指定字符串结尾
 - [x] start - 给定值的单个实例添加到字符串中
 - [x] finish - 将指定的字符串修改为以指定的值结尾的形式
 - [x] lower - 用于将字符串转换为小写
@@ -80,7 +80,7 @@
 - [ ] ucsplit - 将给定的字符串按大写字符拆分为数组
 - [ ] wordCount - 返回字符串包含的单词数
 - [ ] wordWrap
-- [ ] uuid - 生成一个 UUID（版本 4）
+- [x] uuid - 生成一个 UUID（版本 4）
 - [ ] orderedUuid - 用于生成一个「时间戳优先」的 UUID 
 - [ ] isUuid - 确定给定的字符串是否是一个 UUID
 - [ ] ulid - 生成一个 ULID
@@ -534,8 +534,111 @@ def replaceIgnoreCase(cls, subject: str, search: str, replace: str, count: int =
 ## prepend - 用于在指定字符串的开头插入另一指定字符串
 ## append - 将给定的值附加到字符串
 ## remove - 用于从字符串中删除给定的值或值数组
+`remove` 方法从字符串中删除给定值或给定数组内的所有值，还可以将 `False`作为第三个参数传递给 `remove` 方法以在删除字符串时忽略大小写。
+
+```python
+def remove(search: Union[str, Tuple[str], List[str], Set[str]], subject: str, caseSensitive: bool = True) -> str:
+```
+
+### - 参数说明
+
+| 参数          | 类型                                        | 必选 | 默认值 | 说明                             |
+| ------------- | ------------------------------------------- | ---- | ------ | -------------------------------- |
+| search        | Union[str, Tuple[str], List[str], Set[str]] | Y    |        | 执行替换的数组或者字符串         |
+| subject       | str                                         | Y    |        | 执行替换的数组或者字符串         |
+| caseSensitive | bool                                        | N    | True   | 是否大小写敏感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.remove('e', 'Peter Piper picked a peck of pickled peppers.')
+# 结果：Ptr Pipr pickd a pck of pickld ppprs.
+
+Str.remove(['e', 'p'], 'Peter Piper picked a peck of pickled peppers.')
+# 结果：Ptr Pir ickd a ck of ickld rs.
+
+Str.remove(['e', 'p'], 'Peter Piper picked a peck of pickled peppers.', False)
+# 结果：tr ir ickd a ck of ickld rs.
+```
+
+
+
 ## reverse - 反转给定的字符串
+
+```python
+def reverse(value: str) -> str:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明   |
+| ----- | ---- | ---- | ------ | ------ |
+| value | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.reverse('Hello World 中文')		# 结果：文中 dlroW olleH
+```
+
+
+
+## startsWith - 确定给定字符串是否以给定值开头
+
+`startsWith` 方法用来判断给定的字符串是否为给定值的开头，如果传递了一个可能值的数组且字符串以任何给定值开头，则 `startsWith` 方法将返回 `True`
+
+```python
+def startsWith(cls, haystack: str, needles: Union[str, List[str], Tuple[str], Set[str]], caseSensitive: bool = True) -> bool:
+```
+
+### - 参数说明
+
+| 参数          | 类型                                        | 必选 | 默认值 | 说明                             |
+| ------------- | ------------------------------------------- | ---- | ------ | -------------------------------- |
+| haystack      | str                                         | Y    |        | 要被检查的 string                |
+| needles       | Union[str, List[str], Tuple[str], Set[str]] | Y    |        | 前缀字符串或集合                 |
+| caseSensitive | bool                                        | N    | True   | 是否大小写敏感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.startsWith('This is my name', 'This')						# 结果： True
+Str.startsWith('This is my name', 'this')						# 结果： False	
+Str.startsWith('This is my name', 'this', False)				# 结果： True
+Str.startsWith('This is my name', ['This', 'That', 'There'])	# 结果： True
+```
+
+
+
+## endsWith - 用于判断指定字符串是否以另一指定字符串结尾
+
+endsWith 方法确定给定字符串是否以给定值结尾，还可以传递一个值数组来确定给定字符串是否以数组中的任何值结尾。
+
+```python
+def endsWith(cls, haystack: str, needles: Union[str, List[str], Tuple[str], Set[str]], caseSensitive: bool = True) -> bool:
+```
+
+### - 参数说明
+
+| 参数          | 类型                                        | 必选 | 默认值 | 说明                             |
+| ------------- | ------------------------------------------- | ---- | ------ | -------------------------------- |
+| haystack      | str                                         | Y    |        | 要被检查的 string                |
+| needles       | Union[str, List[str], Tuple[str], Set[str]] | Y    |        | 结尾字符串或集合                 |
+| caseSensitive | bool                                        | N    | True   | 是否大小写敏感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.endsWith('This is my name', 'name')							# 结果： True
+Str.endsWith('This is my name', 'Name')							# 结果： False
+Str.endsWith('This is my name', 'Name', False)					# 结果： True
+Str.endsWith('This is my name', ['This', 'foo', 'Name'])		# 结果： False
+```
+
+
+
 ## start - 将给定的值添加到字符串的开始位置
+
 `start` 方法将给定值的单个实例添加到字符串中，前提是该字符串尚未以该值开头
 
 ```python
@@ -642,7 +745,48 @@ def upper(value) -> str:
 ## wordCount - 返回字符串包含的单词数
 ## wordWrap
 ## uuid - 生成一个 UUID（版本 4）
+
+Python UUID模块支持以下版本的UUID：
+
+- UUID1 –使用主机MAC地址，序列号和当前时间生成UUID。此版本使用IEEE 802 MAC地址。
+- UUID3和UUID 5使用加密哈希和应用程序提供的文本字符串来生成UUID。UUID 3使用MD5哈希，而UUID 5使用SHA-1哈希。
+- UUID4使用伪随机数生成器生成UUID。
+
+```python
+def uuid() -> str:
+```
+
+### - 参数说明
+
+无
+
+### - 使用示例
+
+```python
+for _ in range(10):
+	print(Str.uuid())
+	
+# 生成结果：
+8517ebfb-8aba-4fbd-9d29-9b2961e51314
+33cda797-19be-4f3e-85cd-f37c40b68803
+7ca1e4e2-23fb-439b-8fb0-f4b002339d26
+72f10ee6-91a7-4ef1-b4e4-4ddd10597ca0
+9bdce14b-fec5-468d-abb1-701c46cc9835
+039d8897-9846-4709-a165-b0f1e95baeda
+f30e00a4-2ddb-459f-b121-efe05d9d70fb
+74c645a5-d77f-4f38-8d48-ebe9373f4c87
+c388a92e-5dc3-43cd-ac05-cfba0a5a8640
+8e90d7d9-ff64-4a49-9452-d9d41981a410
+```
+
+
+
+
+
+
+
 ## orderedUuid - 用于生成一个「时间戳优先」的 UUID 
+
 ## isUuid - 确定给定的字符串是否是一个 UUID
 ## ulid - 生成一个 ULID
 ## isUlid - 确定给定的字符串是否一个 ULID
