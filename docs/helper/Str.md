@@ -13,8 +13,8 @@
 - [ ] charAt
 - [x] find - 获取子字符串在字符串的首次出现位置
 - [x] rfind - 获取子字符串在字符串的最后出现位置
-- [ ] contains - 判断指定字符串中是否包含另一指定字符串
-- [ ] containsAll - 用于判断指定字符串是否包含指定数组中的所有值
+- [x] contains - 判断指定字符串中是否包含另一指定字符串
+- [ ] ~~containsAll - 用于判断指定字符串是否包含指定数组中的所有值~~
 - [ ] convertCase
 - [ ] excerpt - 提取字符串中给定短语匹配到的第一个片段
 - [ ] wrap
@@ -32,13 +32,13 @@
 - [x] match - 返回字符串中和指定正则表达式匹配的部分
 - [x] matchAll - 返回包含了字符串中与指定正则表达式匹配部分的集合
 - [x] isMatch - 用于判断给定的字符串是否与正则表达式匹配
-- [ ] padBoth - 在指定字符串的两侧填充上另一字符串
-- [ ] padLeft - 在指定字符串的左侧填充上另一字符串
-- [ ] padRight - 在指定字符串的右侧填充上另一字符串
+- [x] padBoth - 在指定字符串的两侧填充上另一字符串
+- [x] padLeft - 在指定字符串的左侧填充上另一字符串
+- [x] padRight - 在指定字符串的右侧填充上另一字符串
 - [ ] parseCallback
-- [ ] plural - 将单数形式的字符串转换为复数形式
+- [x] plural - 将单数形式的字符串转换为复数形式
 - [ ] pluralStudly - 将以驼峰格式的单数字符串转化为其复数形式
-- [ ] singular - 将字符串转换为其单数形式
+- [x] singular - 将字符串转换为其单数形式
 - [ ] password - 生成给定长度的安全随机密码
 - [ ] position
 - [x] random - 生成指定长度的随机字符串
@@ -52,7 +52,7 @@
 - [ ] replaceEnd
 - [x] replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
 - [ ] substrReplace - 替换字符串一部分中的文本
-- [ ] swap - 替换给定字符串中的多个值
+- [x] swap - 替换给定字符串中的多个值
 - [ ] repeat
 - [ ] prepend - 用于在指定字符串的开头插入另一指定字符串
 - [ ] append - 将给定的值附加到字符串
@@ -64,20 +64,19 @@
 - [x] finish - 将指定的字符串修改为以指定的值结尾的形式
 - [x] lower - 用于将字符串转换为小写
 - [x] upper - 将给定字符串转换为大写
-- [ ] headline - 将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
-- [ ] title - 将给定的字符串转换为 `Title Case`
+- [x] headline - 将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
+- [x] title - 将给定的字符串转换为 `Title Case`
 - [ ] slug - 从给定字符串生成 URL 友好的 `“slug”`
-- [ ] camel - 将指定字符串转换为`camelCase 驼峰式` 表示方法
-- [ ] snake - 法将给定字符串转换为 `snake_case`
-- [ ] studly - 将给定字符串转换为 `StudlyCase`
-- [ ] kebab - 将字符串转换为烤串式（ `kebab-case` ）表示方法
-- [ ] squish - 删除字符串中所有无关紧要的空白，包括字符串之间的空白
-- [ ] ucfirst - 返回第一个字符大写的给定字符串
-- [ ] lcfirst - 返回给定的字符串的第一个字符为小写字母
-- [ ] substr - 类似python字符串的`切片`功能
-- [ ] substrCount - 返回给定字符串中给定值的出现次数
+- [x] camel - 将指定字符串转换为`camelCase 驼峰式` 表示方法
+- [x] snake - 法将给定字符串转换为 `snake_case`
+- [x] studly - 将给定字符串转换为 `StudlyCase`
+- [x] kebab - 将字符串转换为烤串式（ `kebab-case` ）表示方法
+- [x] squish - 删除字符串中所有无关紧要的空白，包括字符串之间的空白
+- [x] ucfirst - 返回第一个字符大写的给定字符串
+- [x] lcfirst - 返回给定的字符串的第一个字符为小写字母
+- [x] substrCount - 返回给定字符串中给定值的出现次数
 - [ ] take
-- [ ] ucsplit - 将给定的字符串按大写字符拆分为数组
+- [x] ucsplit - 将给定的字符串按大写字符拆分为数组
 - [ ] wordCount - 返回字符串包含的单词数
 - [ ] wordWrap
 - [x] uuid - 生成一个 UUID（版本 4）
@@ -178,7 +177,31 @@ Str.rfind('你好Python 你好Python', '好P')				# 结果： 10
 
 ## contains - 判断指定字符串中是否包含另一指定字符串
 
-## containsAll - 用于判断指定字符串是否包含指定数组中的所有值
+`contains` 方法判断指定字符串中是否包含另一指定字符串或一组字符串（默认区分大小写），可通过设置第三个参数`ignoreCase`为`True`忽略大小写。
+
+```python
+def contains(haystack: str, needles: Union[str, Tuple[str], List[str], Set[str]], ignoreCase: bool = False) -> bool:
+```
+
+### - 参数说明
+
+| 参数       | 类型                                        | 必选 | 默认值 | 说明                           |
+| ---------- | ------------------------------------------- | ---- | ------ | ------------------------------ |
+| haystack   | str                                         | Y    |        | 字符串                         |
+| needles    | Union[str, Tuple[str], List[str], Set[str]] | Y    |        | 子字符串或数组                 |
+| ignoreCase | bool                                        | N    | False  | 是否区分大小写，默认区分大小写 |
+
+### - 使用示例
+
+```python
+Str.contains('This is my name', 'my')				# True
+Str.contains('This is my name', ['my', 'foo'])		# True
+Str.contains('This is my name', 'My')				# False
+Str.contains('This is my name', 'My', True)			# True
+```
+
+
+
 ## convertCase
 ## excerpt - 提取字符串中给定短语匹配到的第一个片段
 ## wrap
@@ -250,8 +273,6 @@ print(f"混合字符串：{Str.size('abcde中文字符串')}")					# 结果：20
 print(f"混合字符串GBK：{Str.size('abcde中文字符串', encoding='gbk')}")		# 结果：15
 print(f"非字符串值：{Str.size(None)}")		# 结果：0
 ```
-
-
 
 
 
@@ -398,10 +419,57 @@ Str.isMatch('foo (.*)', 'laravel')		# 结果：False
 ## padLeft - 在指定字符串的左侧填充上另一字符串
 ## padRight - 在指定字符串的右侧填充上另一字符串
 ## parseCallback
+
+
 ## plural - 将单数形式的字符串转换为复数形式
+
+```python
+def plural(word: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明           |
+| ---- | ---- | ---- | ------ | -------------- |
+| word | str  | Y    |        | 需要转换的单词 |
+
+### - 使用示例
+
+```python
+Str.plural('car')			# cars
+Str.plural('cars')			# cars
+Str.plural('child')			# children
+Str.plural('children')		# children
+```
+
+
+
 ## pluralStudly - 将以驼峰格式的单数字符串转化为其复数形式
+
 ## singular - 将字符串转换为其单数形式
+```python
+def singular(word: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明           |
+| ---- | ---- | ---- | ------ | -------------- |
+| word | str  | Y    |        | 需要转换的单词 |
+
+### - 使用示例
+
+```python
+Str.singular('car')				# car
+Str.singular('cars')			# car
+Str.singular('child')			# child
+Str.singular('children')		# child
+```
+
+
+
 ## password - 生成给定长度的安全随机密码
+
 ## position
 
 
@@ -531,7 +599,32 @@ def replaceIgnoreCase(cls, subject: str, search: str, replace: str, count: int =
 ## replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
 ## substrReplace - 替换字符串一部分中的文本
 ## swap - 替换给定字符串中的多个值
+```python
+def swap(maps: Dict[str, str], subject: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型           | 必选 | 默认值 | 说明             |
+| ------- | -------------- | ---- | ------ | ---------------- |
+| maps    | Dict[str, str] | Y    |        | 替换的映射字典   |
+| subject | str            | Y    |        | 需要替换的字符串 |
+
+### - 使用示例
+
+```python
+Str.swap({
+        'Tacos': 'Burritos',
+        'great': 'fantastic'
+    }, 'Tacos are great!')
+
+# 结果：Burritos are fantastic!
+```
+
+
+
 ## prepend - 用于在指定字符串的开头插入另一指定字符串
+
 ## append - 将给定的值附加到字符串
 ## remove - 用于从字符串中删除给定的值或值数组
 `remove` 方法从字符串中删除给定值或给定数组内的所有值，还可以将 `False`作为第三个参数传递给 `remove` 方法以在删除字符串时忽略大小写。
@@ -723,26 +816,258 @@ def upper(value) -> str:
 
 `headline` 方法会将由大小写、连字符或下划线分隔的字符串转换为空格分隔的字符串，每个单词的首字母大写
 
+```python
+def headline(cls, text: str) -> str:
+```
 
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.headline('steve_jobs')
+# Steve Jobs
+
+Str.headline('EmailNotificationDelivery')
+# Email Notification Delivery
+```
 
 
 
 ## title - 将给定的字符串转换为 `Title Case`
+```python
+def title(value: str) -> str:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明   |
+| ----- | ---- | ---- | ------ | ------ |
+| value | str  | Y    | 无     | 字符串 |
+
+### - 使用示例：
+
+```python
+_text = "They're john's relatives."
+
+# Python str.title()方法存在的问题：
+_text.title()
+# 结果： They'Re John'S Relatives.
+
+# 使用Str.title()方法
+Str.title(_text)
+# 结果： They're John's Relatives.
+```
+
+
+
 ## slug - 从给定字符串生成 URL 友好的 `“slug”`
+
 ## camel - 将指定字符串转换为`camelCase 驼峰式` 表示方法
-## snake - 法将给定字符串转换为 `snake_case`
+```python
+def camel(cls, text: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.camel('foo_bar')		# fooBar
+```
+
+
+
 ## studly - 将给定字符串转换为 `StudlyCase`
+
+```python
+def studly(cls, value: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.studly('foo_bar')			# FooBar
+```
+
+
+
+## snake - 法将给定字符串转换为 `snake_case`
+
+```python
+def snake(cls, text: str, delimiter: str = '_') -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+| sep  | str  | N    | _      | "_"    |
+
+### - 使用示例
+
+```python
+Str.snake('fooBar')				
+# foo_bar
+```
+
+
+
 ## kebab - 将字符串转换为烤串式（ `kebab-case` ）表示方法
+
+```python
+def kebab(cls, text: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.kebab("fooBar")
+# foo-bar
+```
+
+
+
 ## squish - 删除字符串中所有无关紧要的空白，包括字符串之间的空白
+
+```python
+def squish(text: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.squish('    Hello    Python    中文     世界')			# Hello Python 中文 世界
+```
+
+
+
 ## ucfirst - 返回第一个字符大写的给定字符串
+
+```python
+def ucfirst(text: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.ucfirst('foo bar')
+
+# Foo bar
+```
+
+
+
 ## lcfirst - 返回给定的字符串的第一个字符为小写字母
-## startsWith - 确定给定字符串是否以给定值开头
-## endsWith - 用于判断指定字符串是否以另一指定字符串结尾
-## substr - 类似python字符串的`切片`功能
+
+```python
+def lcfirst(text: str) -> str:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.lcfirst('Foo Bar')
+
+# foo Bar
+```
+
+
+
 ## substrCount - 返回给定字符串中给定值的出现次数
+```python
+def substrCount(haystack: str, needle: str, offset: int = 0, length: Optional[int] = None) -> int:
+```
+
+### - 参数说明
+
+| 参数     | 类型          | 必选 | 默认值 | 说明                   |
+| -------- | ------------- | ---- | ------ | ---------------------- |
+| haystack | str           | Y    |        | 被检查的字符串         |
+| needle   | str           | Y    |        | 要搜索的字符串         |
+| offset   | int           | N    | 0      | 在字符串中何处开始搜索 |
+| length   | Optional[int] | N    | None   | 搜索的长度             |
+
+### - 使用示例
+
+```python
+Str.substrCount('If you like ice cream, you will like snow cones.', 'like')		# 结果：2
+```
+
+
+
 ## take
+
 ## ucsplit - 将给定的字符串按大写字符拆分为数组
+```python
+def ucsplit(text: str) -> List[str]:
+```
+
+### - 参数说明
+
+| 参数 | 类型 | 必选 | 默认值 | 说明   |
+| ---- | ---- | ---- | ------ | ------ |
+| text | str  | Y    |        | 字符串 |
+
+### - 使用示例
+
+```python
+Str.ucsplit('FooBar')
+# ['Foo', 'Bar']
+
+Str.ucsplit('Foo Bar')
+# ['Foo', 'Bar']
+
+Str.ucsplit('TheLongAndWindingRoad')
+# ['The', 'Long', 'And', 'Winding', 'Road']
+
+Str.ucsplit('TheLongAndWindingRoad ABC A123B45')
+# ['The', 'Long', 'And', 'Winding', 'Road', 'A', 'B', 'C', 'A123', 'B45']
+```
+
+
+
 ## wordCount - 返回字符串包含的单词数
+
 ## wordWrap
 ## uuid - 生成一个 UUID（版本 4）
 
@@ -778,10 +1103,6 @@ f30e00a4-2ddb-459f-b121-efe05d9d70fb
 c388a92e-5dc3-43cd-ac05-cfba0a5a8640
 8e90d7d9-ff64-4a49-9452-d9d41981a410
 ```
-
-
-
-
 
 
 
