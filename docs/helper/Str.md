@@ -3,24 +3,24 @@
 ## TODO功能清单：
 
 - [ ] ascii - 尝试将字符串转换为 ASCII 值
-- [ ] after - 返回字符串中指定值之后的所有内容
-- [ ] afterLast - 返回字符串中指定值最后一次出现后的所有内容
+- [x] after - 返回字符串中指定值之后的所有内容
+- [x] afterLast - 返回字符串中指定值最后一次出现后的所有内容
 - [ ] transliterate
-- [ ] before - 返回字符串中指定值之前的所有内容
-- [ ] beforeLast - 返回字符串中指定值最后一次出现前的所有内容
-- [ ] between - 返回字符串在指定两个值之间的内容
-- [ ] betweenFirst - 返回字符串在指定两个值之间的最小可能的部分
+- [x] before - 返回字符串中指定值之前的所有内容
+- [x] beforeLast - 返回字符串中指定值最后一次出现前的所有内容
+- [x] between - 返回字符串在指定两个值之间的内容
+- [x] betweenFirst - 返回字符串在指定两个值之间的最小可能的部分
 - [ ] charAt
 - [x] find - 获取子字符串在字符串的首次出现位置
 - [x] rfind - 获取子字符串在字符串的最后出现位置
 - [x] contains - 判断指定字符串中是否包含另一指定字符串
 - [ ] ~~containsAll - 用于判断指定字符串是否包含指定数组中的所有值~~
-- [ ] convertCase
+- [ ] ~~convertCase~~
 - [ ] excerpt - 提取字符串中给定短语匹配到的第一个片段
-- [ ] wrap
-- [ ] is - 用来判断字符串是否与指定模式匹配
+- [x] wrap - 用给定字符串包裹字符串
+- [ ] ~~is - 用来判断字符串是否与指定模式匹配~~
 - [ ] isAscii - 用于判断字符串是否是 7 位 ASCII
-- [ ] isJson - 确定给定的字符串是否是有效的 JSON
+- [x] isJson - 确定给定的字符串是否是有效的 JSON
 - [ ] isUrl
 - [x] length - 获取字符个数
 - [x] size - 获取字符串的字节个数
@@ -39,19 +39,20 @@
 - [x] plural - 将单数形式的字符串转换为复数形式
 - [ ] pluralStudly - 将以驼峰格式的单数字符串转化为其复数形式
 - [x] singular - 将字符串转换为其单数形式
-- [ ] password - 生成给定长度的安全随机密码
-- [ ] position
+- [x] password - 生成给定长度的安全随机密码
+- [x] position - 查找字符串在另一字符串中第一次出现的位置
+- [x] positionLast - 查找字符串在另一字符串中最后一次出现的位置
 - [x] random - 生成指定长度的随机字符串
 - [ ] toStringOr
 - [x] replace - 用于替换字符串中的给定字符串
 - [x] replaceIgnoreCase - 用于替换字符串中的给定字符串（不区分大小写）
-- [ ] replaceArray - 使用数组有序的替换字符串中的特定字符
-- [ ] replaceFirst - 替换字符串中给定值的第一个匹配项
-- [ ] replaceLast - 替换字符串中最后一次出现的给定值
-- [ ] replaceStart
-- [ ] replaceEnd
+- [x] replaceArray - 使用数组有序的替换字符串中的特定字符
+- [x] replaceFirst - 替换字符串中给定值的第一个匹配项
+- [x] replaceLast - 替换字符串中最后一次出现的给定值
+- [x] replaceStart - 替换字符串开头第一个出现的给定值
+- [x] replaceEnd - 如果给定值出现在字符串末尾，则替换最后出现的值
 - [x] replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
-- [ ] substrReplace - 替换字符串一部分中的文本
+- [x] substrReplace - 替换字符串一部分中的文本
 - [x] swap - 替换给定字符串中的多个值
 - [ ] repeat
 - [ ] prepend - 用于在指定字符串的开头插入另一指定字符串
@@ -78,10 +79,10 @@
 - [ ] take
 - [x] ucsplit - 将给定的字符串按大写字符拆分为数组
 - [ ] wordCount - 返回字符串包含的单词数
-- [ ] wordWrap
+- [ ] ~~wordWrap~~
 - [x] uuid - 生成一个 UUID（版本 4）
 - [ ] orderedUuid - 用于生成一个「时间戳优先」的 UUID 
-- [ ] isUuid - 确定给定的字符串是否是一个 UUID
+- [x] isUuid - 确定给定的字符串是否是一个 UUID
 - [ ] ulid - 生成一个 ULID
 - [ ] isUlid - 确定给定的字符串是否一个 ULID
 - [x] isEmpty - 确定给定的字符串是否为空
@@ -96,14 +97,148 @@
 
 
 ## after - 返回字符串中指定值之后的所有内容
+`after` 方法返回字符串中指定值之后的所有内容。如果字符串中不存在这个值，它将返回整个字符串
+
+```python
+def after(subject: str, search: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 指定检索的字符串 |
+
+### - 使用示例
+
+```python
+Str.after('This is my name', 'This is')							# ' my name'
+Str.after('This is my name', 'That is')							# 'This is my name'
+Str.after('AAAAThis is my name', 'This is')						# ' my name'
+Str.after('This is my name1 This is my name2', 'This is')		# ' my name1 This is my name2'
+```
+
+
+
 ## afterLast - 返回字符串中指定值最后一次出现后的所有内容
+
+`afterLast` 方法返回字符串中指定值最后一次出现后的所有内容。如果字符串中不存在这个值，它将返回整个字符串
+
+```python
+def afterLast(cls, subject: str, search: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 指定检索的字符串 |
+
+### - 使用示例
+
+```python
+Str.afterLast(r'App\Http\Controllers\Controller', '\\')		# 'Controller'
+```
+
+
 
 
 ## transliterate
+
+
 ## before - 返回字符串中指定值之前的所有内容
+
+```python
+def before(cls, subject: str, search: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 指定检索的字符串 |
+
+### - 使用示例
+
+```python
+Str.before('This is my name', 'my name')		# 'This is '
+```
+
+
+
 ## beforeLast - 返回字符串中指定值最后一次出现前的所有内容
+
+```python
+def beforeLast(cls, subject: str, search: str):
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 指定检索的字符串 |
+
+### - 使用示例
+
+```python
+Str.beforeLast('This is my name', 'is')		# 'This '
+```
+
+
+
 ## between - 返回字符串在指定两个值之间的内容
+
+`between` 方法返回两个值之间的字符串部分
+
+```python
+def between(cls, subject: str, start: str, end: str):
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明       |
+| ------- | ---- | ---- | ------ | ---------- |
+| subject | str  | Y    |        | 字符串     |
+| start   | str  | Y    |        | 起始字符串 |
+| end     | str  | Y    |        | 结束字符串 |
+
+### - 使用示例
+
+```python
+Str.between('This is my name', 'This', 'name')		# ' is my '
+Str.between('[a] bc [d]', '[', ']')					# 'a] bc [d'
+```
+
+
+
 ## betweenFirst - 返回字符串在指定两个值之间的最小可能的部分
+
+`betweenFirst` 方法返回两个值之间字符串的最小可能部分
+
+```python
+def betweenFirst(cls, subject: str, start: str, end: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明       |
+| ------- | ---- | ---- | ------ | ---------- |
+| subject | str  | Y    |        | 字符串     |
+| start   | str  | Y    |        | 起始字符串 |
+| end     | str  | Y    |        | 结束字符串 |
+
+### - 使用示例
+
+```python
+Str.betweenFirst('[a] bc [d]', '[', ']')		# 'a'
+```
+
+
+
 ## charAt
 
 
@@ -204,11 +339,57 @@ Str.contains('This is my name', 'My', True)			# True
 
 ## convertCase
 ## excerpt - 提取字符串中给定短语匹配到的第一个片段
-## wrap
+
+
+## wrap - 用给定字符串包裹字符串
+
+```python
+def wrap(value: str, before: str, after: Optional[str] = None) -> str:
+```
+
+### - 参数说明
+
+| 参数   | 类型          | 必选 | 默认值 | 说明                             |
+| ------ | ------------- | ---- | ------ | -------------------------------- |
+| value  | str           | Y    |        | 字符串                           |
+| before | str           | Y    |        | 前缀字符串                       |
+| after  | Optional[str] | N    | None   | 后缀字符串，未设置时使用`before` |
+
+### - 使用示例
+
+```python
+Str.wrap('word', '#')				# '#word#'
+Str.wrap('word', '[', ']')			# '[word]'
+```
+
+
+
 ## is - 用来判断字符串是否与指定模式匹配
 ## isAscii - 用于判断字符串是否是 7 位 ASCII
 ## isJson - 确定给定的字符串是否是有效的 JSON
-## isUrl
+```python
+def isJson(value) -> bool:
+```
+
+### - 参数说明
+
+| 参数  | 类型 | 必选 | 默认值 | 说明 |
+| ----- | ---- | ---- | ------ | ---- |
+| value |      | Y    |        |      |
+
+### - 使用示例
+
+```python
+Str.isJson('[1,2,3]')								# True
+Str.isJson('{"first": "John", "last": "Doe"}')		# True
+Str.isJson('{first: "John", last: "Doe"}')			# False
+```
+
+
+
+## isUrl - 确定给定值是否为有效 URL
+
+
 
 
 ## length - 获取字符个数
@@ -416,8 +597,63 @@ Str.isMatch('foo (.*)', 'laravel')		# 结果：False
 
 ## padBoth - 在指定字符串的两侧填充上另一字符串
 
+```python
+def padBoth(value: str, length: int, pad: str = ' ') -> str:
+```
+
+### - 参数说明
+
+| 参数   | 类型 | 必选 | 默认值 | 说明                 |
+| ------ | ---- | ---- | ------ | -------------------- |
+| value  | str  | Y    |        | 字符串               |
+| length | int  | Y    |        | 要求填充字符串总长度 |
+| pad    | str  | N    | ' '    | 填充的字符           |
+
+### - 使用示例
+
+```python
+Str.padBoth('James', 10, '_')			# '__James___'
+Str.padBoth('James', 10)				# '  James   '
+```
+
+
+
 ## padLeft - 在指定字符串的左侧填充上另一字符串
+
+```python
+def padLeft(value: str, length: int, pad: str = ' ') -> str:
+```
+
+### - 参数说明
+
+| 参数   | 类型 | 必选 | 默认值 | 说明                 |
+| ------ | ---- | ---- | ------ | -------------------- |
+| value  | str  | Y    |        | 字符串               |
+| length | int  | Y    |        | 要求填充字符串总长度 |
+| pad    | str  | N    | ' '    | 填充的字符           |
+
+### - 使用示例
+
+
+
 ## padRight - 在指定字符串的右侧填充上另一字符串
+
+```python
+def padRight(value: str, length: int, pad: str = ' ') -> str:
+```
+
+### - 参数说明
+
+| 参数   | 类型 | 必选 | 默认值 | 说明                 |
+| ------ | ---- | ---- | ------ | -------------------- |
+| value  | str  | Y    |        | 字符串               |
+| length | int  | Y    |        | 要求填充字符串总长度 |
+| pad    | str  | N    | ' '    | 填充的字符           |
+
+### - 使用示例
+
+
+
 ## parseCallback
 
 
@@ -470,7 +706,79 @@ Str.singular('children')		# child
 
 ## password - 生成给定长度的安全随机密码
 
-## position
+`password` 方法可用于生成给定长度的安全随机密码。密码由字母、数字、符号和空格组成。默认情况下，密码长度为 32 位
+
+```python
+def password(cls, length: int = 32, letters: bool = True, numbers: bool = True, symbols: bool = True, spaces: bool = False) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明                 |
+| ------- | ---- | ---- | ------ | -------------------- |
+| length  | int  | N    | 32     | 生成密码长度，默认32 |
+| letters | bool | N    | True   | 是否必须包含字母     |
+| numbers | bool | N    | True   | 是否必须包含数字     |
+| symbols | bool | N    | True   | 是否必须包含符号     |
+| spaces  | bool | N    | False  | 是否必须包含空格     |
+
+### - 使用示例
+
+```python
+Str.password()		# '&2kNA1*)fF|3GJ{&X?_;8&GS-x9-\St['
+Str.password(12)	# '5f{SPSKh?|!G'
+```
+
+
+
+## position - 查找字符串在另一字符串中第一次出现的位置
+
+`position`返回字符串在另一字符串中第一次出现的位置，如果没有找到字符串则返回 -1
+
+```python
+def position(haystack: str, needle: str, caseSensitive: bool = True) -> int:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| haystack      | str  | Y    |        | 被搜索的字符串                   |
+| needle        | str  | Y    |        | 要查找的字符串                   |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.position('You love python, I love python too!', 'python')		# 9
+Str.position('You love python, I love python too!', 'php')			# -1
+```
+
+
+
+## positionLast - 查找字符串在另一字符串中最后一次出现的位置
+
+`positionLast`查找字符串在另一字符串中最后一次出现的位置，如果没有找到字符串则返回 -1
+
+```python
+def positionLast(haystack: str, needle: str, caseSensitive: bool = True) -> int:
+```
+
+### - 参数说明
+
+| 参数          | 类型 | 必选 | 默认值 | 说明                             |
+| ------------- | ---- | ---- | ------ | -------------------------------- |
+| haystack      | str  | Y    |        | 被搜索的字符串                   |
+| needle        | str  | Y    |        | 要查找的字符串                   |
+| caseSensitive | bool | N    | True   | 是否大小写母感，默认为区分大小写 |
+
+### - 使用示例
+
+```python
+Str.position('You love python, I love python too!', 'python')		# 24
+Str.position('You love python, I love python too!', 'php')			# -1
+```
+
 
 
 ## random - 生成指定长度的随机字符串
@@ -587,18 +895,164 @@ def replaceIgnoreCase(cls, subject: str, search: str, replace: str, count: int =
 
 
 
-
-
 ## replaceArray - 使用数组有序的替换字符串中的特定字符
 
-## replaceFirst - 替换字符串中给定值的第一个匹配项
-## replaceLast - 替换字符串中最后一次出现的给定值
-## replaceStart
+```python
+def replaceArray(subject: str, search: str, replace: Union[List[str], Tuple[str]]) -> str:
+```
 
-## replaceEnd
+### - 参数说明
+
+| 参数    | 类型                         | 必选 | 默认值 | 说明             |
+| ------- | ---------------------------- | ---- | ------ | ---------------- |
+| subject | str                          | Y    |        | 字符串           |
+| search  | str                          | Y    |        | 需要替换的字符串 |
+| replace | Union[List[str], Tuple[str]] | Y    |        | 替换的字符串序列 |
+
+### - 使用示例
+
+```python
+Str.replaceArray('该活动将在 ? 至 ? 举行', '?', ['8:30', '9:00'])
+# 该活动将在 8:30 至 9:00 举行
+```
+
+
+
+## replaceFirst - 替换字符串中给定值的第一个匹配项
+
+```python
+def replaceFirst(cls, subject: str, search: str, replace: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 需要替换的字符串 |
+| replace | str  | Y    |        | 替换的字符串     |
+
+### - 使用示例
+
+```python
+Str.replaceFirst('the quick brown fox jumps over the lazy dog', 'the', 'a')
+# a quick brown fox jumps over the lazy dog
+```
+
+
+
+## replaceLast - 替换字符串中最后一次出现的给定值
+
+```python
+def replaceLast(cls, subject: str, search: str, replace: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 需要替换的字符串 |
+| replace | str  | Y    |        | 替换的字符串     |
+
+### - 使用示例
+
+```python
+Str.replaceLast('the quick brown fox jumps over the lazy dog', 'the', 'a')
+# the quick brown fox jumps over a lazy dog
+```
+
+
+
+## replaceStart - 替换字符串开头第一个出现的给定值
+
+```python
+def replaceStart(cls, subject: str, search: str, replace: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 需要替换的字符串 |
+| replace | str  | Y    |        | 替换的字符串     |
+
+### - 使用示例
+
+
+
+## replaceEnd - 如果给定值出现在字符串末尾，则替换最后出现的值
+
+```python
+def replaceEnd(cls, subject: str, search: str, replace: str) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明             |
+| ------- | ---- | ---- | ------ | ---------------- |
+| subject | str  | Y    |        | 字符串           |
+| search  | str  | Y    |        | 需要替换的字符串 |
+| replace | str  | Y    |        | 替换的字符串     |
+
+### - 使用示例
+
+
+
 ## replaceMatches - 用给定的替换字符串替换与模式匹配的字符串的所有部分
+
+```python
+def replaceMatches(subject, pattern: Union[str, re.Pattern], replace: Union[str, Callable], count: int = -1, flags: int = 0):
+```
+
+### - 参数说明
+
+| 参数    | 类型 | 必选 | 默认值 | 说明                                                         |
+| ------- | ---- | ---- | ------ | ------------------------------------------------------------ |
+| subject | str  | Y    |        | 要被查找替换的原始字符串                                     |
+| pattern | str  | Y    |        | 要搜索的模式，可以是字符串                                   |
+| replace | str  | Y    |        | 替换的字符串，也可为一个函数                                 |
+| count   | int  | N    | 0      | 可选，对于每个模式用于每个 subject 字符串的最大可替换次数。 默认是0（无限制） |
+| flags   | bool | N    | True   | 标志位，用于控制正则表达式的匹配方式，如：是否区分大小写，多行匹配等等 |
+
+### - 使用示例
+
+```python
+Str.replaceMatches('(+1) 501-555-1000', '[^A-Za-z0-9]+', '')		# 15015551000
+```
+
+
+
 ## substrReplace - 替换字符串一部分中的文本
+
+`substrReplace` 方法替换字符串一部分中的文本，从第三个参数指定的位置开始，替换第四个参数指定的字符数。 当「0」传递给方法的第四个参数将在指定位置插入字符串，而不是替换字符串中的任何现有字符
+
+```python
+def substrReplace(subject: str, replace: str, offset=0, length: Optional[int] = None) -> str:
+```
+
+### - 参数说明
+
+| 参数    | 类型          | 必选 | 默认值 | 说明                                                         |
+| ------- | ------------- | ---- | ------ | ------------------------------------------------------------ |
+| subject | str           | Y    |        | 被检查的字符串                                               |
+| replace | str           | Y    |        | 要替换或插入的字符串                                         |
+| offset  | int           | N    | 0      | 在字符串中何处开始搜索<br />正数 - 在字符串中的指定位置开始替换<br/>负数 - 在从字符串结尾的指定位置开始替换<br/>0 - 在字符串中的第一个字符处开始替换 |
+| length  | Optional[int] | N    | None   | 要替换多少个字符。默认是与字符串长度相同<br />正数 - 被替换的字符串长度<br/>负数 - 表示待替换的子字符串结尾处距离 string 末端的字符个数。<br/>0 - 插入而非替换 |
+
+### - 使用示例
+
+```python
+Str.substrReplace('Hello world', 'Shanghai', 6)		# 'Hello Shanghai'
+Str.substrReplace('1300', ':', 2)					# '13:'
+Str.substrReplace('1300', ':', 2, 0)				# '13:00'
+```
+
+
+
 ## swap - 替换给定字符串中的多个值
+
 ```python
 def swap(maps: Dict[str, str], subject: str) -> str:
 ```
