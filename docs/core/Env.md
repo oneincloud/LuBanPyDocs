@@ -20,6 +20,7 @@
 | `__TOP_PROCESS_ID__`      | Y    | int  | 获取主进程ID                                                 |
 | `__IS_TOP_PROCESS__`      | Y    | bool | 检查当前进程是否主进程                                       |
 | `__RUNTIME_MODE__`        | Y    | int  | 获取应用运行模式代码<br />0 - 正常模式（单进程模式）<br />1 - 应用模式（支持多进程） |
+| `__LUBAN_DEBUG__`         | Y    | bool | 框架内置专用调试控制阀，True时打印框架内部的运行日志，可通过环境变量或.env配置`LUBAN_DEBUG`，不能在程序中修改 |
 
 
 
